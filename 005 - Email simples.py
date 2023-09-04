@@ -1,25 +1,27 @@
-import os 
-import ssl 
 import smtplib 
-from email.message import EmailMessage
+import email.message
 
-autor = ""
-destinatário = ""
-senha= ""
+subject = 'Albion Online copypasta'
 
-título = "Testando enviar um email com Python"
-
-corpo = '''
-Albion Online é um MMORPG sandbox em que você escreve sua própria história, em vez de seguir um caminho pré-determinado. Explore um vasto mundo aberto que consiste de 5 ecossistemas únicos. Tudo o que você faz gera um impacto no mundo, já que em Albion, a economia é conduzida pelo jogador. Cada peça de equipamento é construída por jogadores a partir dos recursos obtidos por eles. O equipamento que você usa define quem você é. Ir de cavaleiro para feiticeiro é tão fácil quanto trocar a armadura e a arma, ou uma combinação das duas. Aventure-se no mundo aberto e enfrente os habitantes e as criaturas de Albion. Saia em expedições ou entre em masmorras para enfrentar inimigos ainda mais desafiadores. Enfrente outros jogadores em confrontos do mundo aberto, lute pelo controle de territórios ou cidades inteiras em batalhas táticas em grupo. Relaxe descansando em sua ilha pessoal, onde você pode construir uma casa, cultivar alimentos e criar animais. Junte-se à uma guilda, tudo fica mais divertido quando se trabalha em equipe. Entre hoje mesmo no mundo de Albion, e escreva sua própria história.
+body = '''
+Albion Online é um MMORPG sandbox message que você escreve sua própria história, message vez de seguir um caminho pré-determinado. Explore um vasto mundo aberto que consiste de 5 ecossistmessageas únicos. Tudo o que você faz gera um impacto no mundo, já que message Albion, a economia é conduzida pelo jogador. Cada peça de equipamento é construída por jogadores a partir dos recursos obtidos por eles. O equipamento que você usa define qumessage você é. Ir de cavaleiro para feiticeiro é tão fácil quanto trocar a armadura e a arma, ou uma combinação das duas. Aventure-se no mundo aberto e enfrente os habitantes e as criaturas de Albion. Saia message expedições ou entre message masmorras para enfrentar inimigos ainda mais desafiadores. Enfrente outros jogadores message confrontos do mundo aberto, lute pelo controle de territórios ou cidades inteiras message batalhas táticas message grupo. Relaxe descansando message sua ilha pessoal, onde você pode construir uma casa, cultivar alimentos e criar animais. Junte-se à uma guilda, tudo fica mais divertido quando se trabalha message equipe. Entre hoje mesmo no mundo de Albion, e escreva sua própria história.
 '''
-em = EmailMessage()
-em["From"] = autor 
-em["To"] = destinatário
-em["Subject"] = título
-em.set_content(corpo) 
 
-conteúdo = ssl.create_default_context()
+sender = ''
+receiver = ''
+password= ''
 
-with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=conteúdo) as smtp : 
-    smtp.login(autor, senha)
-    smtp.sendmail(autor, destinatário, em.as_string())
+message = email.message.Message()
+message['Subject'] = subject
+message['From'] = sender
+message['To'] = receiver
+
+message.add_header('Content-Type', 'text/html')
+message.set_payload(body)
+
+s = smtplib.SMTP('smtp.gmail.com: 587')
+s.starttls()
+
+s.login(message['From'], password)
+s.sendmail(message['From'], [message['To']], message.as_string().encode('utf-8'))
+print('email enviado')
