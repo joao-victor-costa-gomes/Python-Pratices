@@ -1,12 +1,18 @@
-import status
-from status import Pokemon
 import os
+import platform
+status = __import__("004 - POOkemon (status)")
 
-pokemon = Pokemon()
+pokemon = status.Pokemon()
 name = input("DIGITE O NOME DO SEU POKEMON: ")
 
 pokemon.nome(name)
 pokemon.status()
+
+def clear_prompt():
+    if platform.system == 'Windows':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 while True:
 
@@ -22,17 +28,17 @@ while True:
     if escolha == 1:
             pokemon.batalha()
             input("\nPressione qualquer tecla...")
-            os.system('cls')
+            clear_prompt()
 
     elif escolha == 2:
         pokemon.mostrar_status()
         input("\nPressione qualquer tecla...")
-        os.system('cls')
+        clear_prompt()
 
     elif escolha == 3:
         pokemon.cura()
         input("\nPressione qualquer tecla...")
-        os.system('cls')
+        clear_prompt()
 
     elif escolha == 4:
         print("\nFIM DO PROGRAMA")
@@ -42,7 +48,7 @@ while True:
     else: 
         print("\nESCOLHA INVÁLIDA")
         input("\nPressione qualquer tecla...")
-        os.system('cls')
+        clear_prompt()
             
       
     
